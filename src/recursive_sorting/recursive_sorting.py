@@ -3,15 +3,50 @@ def merge( arrA, arrB ):
     elements = len( arrA ) + len( arrB )
     merged_arr = [0] * elements
     # TO-DO
-    
+    #Declare indicees for each sublist
+    a=0
+    b=0
+    for i in range(elements):
+        #Check if either list is empty, if so append the other
+        if a >= len(arrA):
+            merged_arr[i] = arrB[b]
+            b +=1
+        elif b >= len(arrB):
+            merged_arr[i] = arrA[a]
+            a+=1
+            #Otherwise, compare and append the smallest of the two
+        elif arrA < arrB[b]:
+            merged_arr[i] = arrA[a]
+            a +=1
+        else:
+            merged_arr[i] = arrB[b]
+            b +=1
+    #Compare first element of each sublist and add the smallest to the merged list
+
+    #Check if both lists are empty. If so, return merged list
     return merged_arr
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
+
+### Step 1: Split our list into sub-lists untill they are all length 1 or less
 def merge_sort( arr ):
     # TO-DO
+    #Check if it's length 1 or less, If so, return the list
+    if len(arr) <= 1:
+        return arr
+    #Divide in half
+    left = arr[ : len(arr) // 2]
+    right = arr[len(arr) // 2 : ]
+    
+    #Sort the left
+    left = merge_sort(left)
 
-    return arr
+    #Sort the right
+    right = merge_sort(right)
+    #Merge together
+    return merge(left, right)    
+    
 
 
 # STRETCH: implement an in-place merge sort algorithm
